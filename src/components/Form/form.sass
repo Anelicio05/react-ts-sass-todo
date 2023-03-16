@@ -1,0 +1,25 @@
+@use '../../style/variavel'
+
+form
+    width: 400px
+    label
+        display: block
+        margin-bottom: 8px
+        font-family: Arial, Helvetica, sans-serif
+        color: variavel.$detalhes
+    input
+        margin-bottom: 15px
+        width: 100%
+        padding: 0.5rem
+        border: none 
+        &::placeholder
+          color: #cacaca
+    input[type='submit']
+       background-color: variavel.$texto-principal
+       color: #ffffff
+       font-weight: bold
+       &:hover
+        background-color: #93d2e7
+        cursor: pointer
+    
+    
