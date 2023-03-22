@@ -1,3 +1,5 @@
+@use '../../style/variavel'
+
 .task
     display: flex
     justify-content: space-between
@@ -6,3 +8,11 @@
     width: 400px
     padding: 10px 0
     border-bottom: 1px solid #000000
+.icon
+    display: flex
+    flex-direction: column
+    gap: 10px
+    i
+        background-color: variavel.$texto-principal
+        padding: 0.5rem
+        cursor: pointer

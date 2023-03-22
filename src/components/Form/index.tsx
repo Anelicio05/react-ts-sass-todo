@@ -5,23 +5,38 @@ import { ITask } from '../../interfaces/Task'
 interface Props{
     btnText: string;
     taskList: ITask[];
-    setTaskList?: React.Dispatch<React.SetStateAction<ITask[]>>
+    setTaskList?: React.Dispatch<React.SetStateAction<ITask[]>>;
+    task?: ITask | null;
+    hundleUpdate?(id: number, title: string, difficulty: number): void
 }
 
-function Form({btnText, taskList, setTaskList}: Props){
+function Form({btnText, taskList, setTaskList, task, hundleUpdate}: Props){
     const [id, setId] = useState<number>(0)
     const [title, setTitle] = useState<string>("")
     const [difficulty, setDifficulty] = useState<number>(0)
 
+    useEffect(()=>{
+        if(task){
+            setId(task.id)
+            setTitle(task.title)
+            setDifficulty(task.difficulty)
+        }
+    }, [task])
+
     function addTaskHandler(e: FormEvent<HTMLFormElement>){
         e.preventDefault()
-        const id = Math.floor(Math.random() * 100)
 
-        const newTask: ITask = {id, title, difficulty}
-        setTaskList!([...taskList, newTask])
+        if(hundleUpdate){
+            hundleUpdate(id, title, difficulty)
+        }else{
+            const id = Math.floor(Math.random() * 100)
 
-        setTitle('')
-        setDifficulty(0)
+            const newTask: ITask = {id, title, difficulty}
+            setTaskList!([...taskList, newTask])
+
+            setTitle('')
+            setDifficulty(0)
+        }
     }
     function handleChange(e: ChangeEvent<HTMLInputElement>){
         if(e.target.name === 'title'){

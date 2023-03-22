@@ -3,9 +3,11 @@ import '../List/list.sass'
 
 interface Props{
     lista: ITask[]
+    deleteList(id: number): void,
+    addModal(task: ITask): void
 }
 
-function List({lista}: Props){
+function List({lista, deleteList, addModal }: Props){
     return(
         <>
             {lista.length > 0 ? (
@@ -16,9 +18,9 @@ function List({lista}: Props){
                         <h3>{item.title}</h3>
                         <p>Dificudade: {item.difficulty}</p>
                     </div>
-                    <div>
-                        <i className="bi bi-pencil"></i>
-                        <i className="bi bi-trash"></i>
+                    <div className="icon">
+                        <i className="bi bi-pencil" onClick={()=>addModal(item)}></i>
+                        <i className="bi bi-trash" onClick={()=>{deleteList(item.id)}}></i>
                     </div>
                 </div>
                 )})
